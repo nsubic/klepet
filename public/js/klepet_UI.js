@@ -1,5 +1,6 @@
 function divElementEnostavniTekst(sporocilo) {
   var jeSmesko = sporocilo.indexOf('http://sandbox.lavbic.net/teaching/OIS/gradivo/') > -1;
+<<<<<<< HEAD
   var jeSlika = sporocilo.indexOf('"class="chat-image" />') > -1;
   if (jeSmesko || jeSlika) {
     sporocilo = sporocilo.replace(/\</g, '&lt;').replace(/\>/g, '&gt;').replace(/"class="chat-image" \/&gt;/gi, '"class="chat-image" />').replace(/&lt;br&gt;&lt;img src="/gi, '<br><img src="').replace('&lt;img', '<img').replace('png\' /&gt;', 'png\' />');
@@ -11,6 +12,8 @@ function divElementEnostavniTekst(sporocilo) {
   if (jeSmesko || jeVideo) {
     sporocilo = sporocilo.replace(/\</g, '&lt;').replace(/\>/g, '&gt;').replace('&lt;img', '<img').replace('png\' /&gt;', 'png\' />').replace(/&lt;iframe src="https:\/\/www.youtube.com\/embed\//gi, '<br><iframe src="https://www.youtube.com/embed/').replace(/" allowfullscreen&gt;&lt;\/iframe&gt;/gi, '" allowfullscreen></iframe>');
   var jeSlika = sporocilo.indexOf('"class="chat-image" />') > -1;
+=======
+>>>>>>> youtube
   var jeVideo = sporocilo.indexOf('<iframe src="https://www.youtube.com/embed/') > -1;
   if (jeSmesko || jeVideo) {
     sporocilo = sporocilo.replace(/\</g, '&lt;').replace(/\>/g, '&gt;').replace('&lt;img', '<img').replace('png\' /&gt;', 'png\' />').replace(/&lt;iframe src="https:\/\/www.youtube.com\/embed\//gi, '<br><iframe src="https://www.youtube.com/embed/').replace(/" allowfullscreen&gt;&lt;\/iframe&gt;/gi, '" allowfullscreen></iframe>');
@@ -27,12 +30,16 @@ function divElementHtmlTekst(sporocilo) {
 function procesirajVnosUporabnika(klepetApp, socket) {
   var sporocilo = $('#poslji-sporocilo').val();
   sporocilo = dodajSmeske(sporocilo);
+<<<<<<< HEAD
   sporocilo += dodajSlike(sporocilo);
   sporocilo += dodajEmbededYoutubePosnetke(sporocilo); 
 
 
   sporocilo += dodajEmbededYoutubePosnetke(sporocilo); 
 
+=======
+  sporocilo += dodajEmbededYoutubePosnetke(sporocilo); 
+>>>>>>> youtube
   var sistemskoSporocilo;
 
   if (sporocilo.charAt(0) == '/') {
@@ -188,6 +195,9 @@ function dodajEmbededYoutubePosnetke(besedilo){
   
   return posnetki;
 }
+<<<<<<< HEAD
 
 }
 
+=======
+>>>>>>> youtube
