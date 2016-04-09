@@ -1,22 +1,7 @@
 function divElementEnostavniTekst(sporocilo) {
   var jeSmesko = sporocilo.indexOf('http://sandbox.lavbic.net/teaching/OIS/gradivo/') > -1;
-<<<<<<< HEAD
-  var jeSlika = sporocilo.indexOf('"class="chat-image" />') > -1;
-  if (jeSmesko || jeSlika) {
-    sporocilo = sporocilo.replace(/\</g, '&lt;').replace(/\>/g, '&gt;').replace(/"class="chat-image" \/&gt;/gi, '"class="chat-image" />').replace(/&lt;br&gt;&lt;img src="/gi, '<br><img src="').replace('&lt;img', '<img').replace('png\' /&gt;', 'png\' />');
-  } else {
-    return $('<div style="font-weight: bold;"></div>').text(sporocilo);
-  }
-  
-  var jeVideo = sporocilo.indexOf('<iframe src="https://www.youtube.com/embed/') > -1;
-  if (jeSmesko || jeVideo) {
-    sporocilo = sporocilo.replace(/\</g, '&lt;').replace(/\>/g, '&gt;').replace('&lt;img', '<img').replace('png\' /&gt;', 'png\' />').replace(/&lt;iframe src="https:\/\/www.youtube.com\/embed\//gi, '<br><iframe src="https://www.youtube.com/embed/').replace(/" allowfullscreen&gt;&lt;\/iframe&gt;/gi, '" allowfullscreen></iframe>');
-  var jeSlika = sporocilo.indexOf('"class="chat-image" />') > -1;
-=======
->>>>>>> youtube
-  var jeVideo = sporocilo.indexOf('<iframe src="https://www.youtube.com/embed/') > -1;
-  if (jeSmesko || jeVideo) {
-    sporocilo = sporocilo.replace(/\</g, '&lt;').replace(/\>/g, '&gt;').replace('&lt;img', '<img').replace('png\' /&gt;', 'png\' />').replace(/&lt;iframe src="https:\/\/www.youtube.com\/embed\//gi, '<br><iframe src="https://www.youtube.com/embed/').replace(/" allowfullscreen&gt;&lt;\/iframe&gt;/gi, '" allowfullscreen></iframe>');
+  if (jeSmesko) {
+    sporocilo = sporocilo.replace(/\</g, '&lt;').replace(/\>/g, '&gt;').replace('&lt;img', '<img').replace('png\' /&gt;', 'png\' />');
     return $('<div style="font-weight: bold"></div>').html(sporocilo);
   } else {
     return $('<div style="font-weight: bold;"></div>').text(sporocilo);
@@ -30,16 +15,6 @@ function divElementHtmlTekst(sporocilo) {
 function procesirajVnosUporabnika(klepetApp, socket) {
   var sporocilo = $('#poslji-sporocilo').val();
   sporocilo = dodajSmeske(sporocilo);
-<<<<<<< HEAD
-  sporocilo += dodajSlike(sporocilo);
-  sporocilo += dodajEmbededYoutubePosnetke(sporocilo); 
-
-
-  sporocilo += dodajEmbededYoutubePosnetke(sporocilo); 
-
-=======
-  sporocilo += dodajEmbededYoutubePosnetke(sporocilo); 
->>>>>>> youtube
   var sistemskoSporocilo;
 
   if (sporocilo.charAt(0) == '/') {
@@ -79,15 +54,6 @@ function filtirirajVulgarneBesede(vhod) {
 
 $(document).ready(function() {
   var klepetApp = new Klepet(socket);
-  
-  socket.on('dregljaj', function(dregljaj) {
-    $('#vsebina').jrumble();
-    $('#vsebina').trigger('startRumble');
-    
-    setTimeout( function(){
-      $('#vsebina').trigger('stopRumble');
-    }, 1500 );    
-  });
 
   socket.on('vzdevekSpremembaOdgovor', function(rezultat) {
     var sporocilo;
@@ -133,11 +99,6 @@ $(document).ready(function() {
     for (var i=0; i < uporabniki.length; i++) {
       $('#seznam-uporabnikov').append(divElementEnostavniTekst(uporabniki[i]));
     }
-    
-    ('#seznam-uporabnikov div').click(function() {
-      ('#poslji-sporocilo').val('/zasebno "' + $(this).text() + '" ');
-      ('#poslji-sporocilo').focus();
-   });
   });
 
   setInterval(function() {
@@ -169,35 +130,4 @@ function dodajSmeske(vhodnoBesedilo) {
       preslikovalnaTabela[smesko] + "' />");
   }
   return vhodnoBesedilo;
-  
 }
-<<<<<<< HEAD
-
-function dodajSlike(besedilo){
-  var slike = besedilo.match(/(http:\/\/|https:\/\/)\S+(.jpg|.gif|.png)\b/gi);
-  
-  var dodaneSlike = "";
-  for(var slika in slike){
-    dodaneSlike += '<br><img src="' + slike[slika] + '"class="chat-image" />';
-  }
-  
-  return dodaneSlike;
-}
- 
-function dodajEmbededYoutubePosnetke(besedilo){
-    var najdeno = besedilo.match(new RegExp("\\bhttps:\/\/www.youtube.com\/watch\\?v\=.+?(?=\\b)", 'gi'));
-  
-  var posnetki = "";
-  for(var video in najdeno){
-    posnetki += " " + (najdeno[video].replace(new RegExp(".*=(.+?(?=\\b))", 'gi'), '<iframe src="https://www.youtube.com/embed/$1" allowfullscreen></iframe>'));
-  }
-    
-  
-  return posnetki;
-}
-<<<<<<< HEAD
-
-}
-
-=======
->>>>>>> youtube
